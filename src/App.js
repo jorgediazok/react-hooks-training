@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import Person from './Person/Person';
-import UserInput from './UserInput/UserInput';
-import UserOutput from './UserOutput/UserOutput';
 import './App.css';
 
 class App extends Component {
@@ -52,41 +50,40 @@ class App extends Component {
       padding: '8px',
       cursor: 'pointer',
     };
+
+    let persons = null;
+
+    if (this.state.showPersons) {
+      persons = (
+        <div>
+          <Person
+            name={this.state.persons[0].name}
+            age={this.state.persons[0].age}
+          />
+          <Person
+            name={this.state.persons[1].name}
+            age={this.state.persons[1].age}
+            click={this.switchNameHandler.bind(this, 'Max!')}
+            change={this.nameChangedHandler}
+          >
+            Hobbies: Singing
+          </Person>
+          <Person
+            name={this.state.persons[2].name}
+            age={this.state.persons[2].age}
+          />
+        </div>
+      );
+    }
+
     return (
       <div className="App">
         <h1>We are going to train a bit with React</h1>
         <p>PATADA DE CANGURO GOLPE DURO</p>
         <button style={style} onClick={this.togglePersonsHandler}>
-          Toggle Persons
+          Switch Name
         </button>
-        {this.state.showPersons === true ? (
-          <div>
-            <Person
-              name={this.state.persons[0].name}
-              age={this.state.persons[0].age}
-            />
-            <Person
-              name={this.state.persons[1].name}
-              age={this.state.persons[1].age}
-              click={this.switchNameHandler.bind(this, 'Max!')}
-              change={this.nameChangedHandler}
-            >
-              Hobbies: Singing
-            </Person>
-            <Person
-              name={this.state.persons[2].name}
-              age={this.state.persons[2].age}
-            />
-          </div>
-        ) : null}
-
-        <UserInput
-          changed={this.usernameChangedHandler}
-          currentName={this.state.username}
-        />
-        <UserOutput userName={this.state.username} />
-        <UserOutput userName={this.state.username} />
-        <UserOutput userName="Sulu  " />
+        {persons}
       </div>
     );
   }
