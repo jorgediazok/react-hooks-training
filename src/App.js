@@ -12,6 +12,7 @@ class App extends Component {
       { name: 'Stephanie', age: 26 },
     ],
     username: 'superJorge',
+    showPersons: false,
   };
 
   switchNameHandler = (newName) => {
@@ -38,6 +39,11 @@ class App extends Component {
     this.setState({ username: event.target.value });
   };
 
+  togglePersonsHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({ showPersons: !doesShow });
+  };
+
   render() {
     const style = {
       backgroundColor: 'white',
@@ -50,28 +56,30 @@ class App extends Component {
       <div className="App">
         <h1>We are going to train a bit with React</h1>
         <p>PATADA DE CANGURO GOLPE DURO</p>
-        <button
-          style={style}
-          onClick={() => this.switchNameHandler('Jorge!!!!!!!')}
-        >
-          Switch Name
+        <button style={style} onClick={this.togglePersonsHandler}>
+          Toggle Persons
         </button>
-        <Person
-          name={this.state.persons[0].name}
-          age={this.state.persons[0].age}
-        />
-        <Person
-          name={this.state.persons[1].name}
-          age={this.state.persons[1].age}
-          click={this.switchNameHandler.bind(this, 'Max!')}
-          change={this.nameChangedHandler}
-        >
-          Hobbies: Singing
-        </Person>
-        <Person
-          name={this.state.persons[2].name}
-          age={this.state.persons[2].age}
-        />
+        {this.state.showPersons === true ? (
+          <div>
+            <Person
+              name={this.state.persons[0].name}
+              age={this.state.persons[0].age}
+            />
+            <Person
+              name={this.state.persons[1].name}
+              age={this.state.persons[1].age}
+              click={this.switchNameHandler.bind(this, 'Max!')}
+              change={this.nameChangedHandler}
+            >
+              Hobbies: Singing
+            </Person>
+            <Person
+              name={this.state.persons[2].name}
+              age={this.state.persons[2].age}
+            />
+          </div>
+        ) : null}
+
         <UserInput
           changed={this.usernameChangedHandler}
           currentName={this.state.username}
