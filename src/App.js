@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Person from './Person/Person';
+import UserInput from './UserInput/UserInput';
+import UserOutput from './UserOutput/UserOutput';
 import './App.css';
 
 class App extends Component {
@@ -32,11 +34,23 @@ class App extends Component {
   };
 
   render() {
+    const style = {
+      backgroundColor: 'white',
+      font: 'inherit',
+      border: '1px solid blue',
+      padding: '8px',
+      cursor: 'pointer',
+    };
     return (
       <div className="App">
         <h1>We are going to train a bit with React</h1>
         <p>PATADA DE CANGURO GOLPE DURO</p>
-        <button onClick={this.switchNameHandler}>Switch Name</button>
+        <button
+          style={style}
+          onClick={() => this.switchNameHandler('Jorge!!!!!!!')}
+        >
+          Switch Name
+        </button>
         <Person
           name={this.state.persons[0].name}
           age={this.state.persons[0].age}
@@ -53,6 +67,10 @@ class App extends Component {
           name={this.state.persons[2].name}
           age={this.state.persons[2].age}
         />
+        <UserInput />
+        <UserOutput />
+        <UserOutput />
+        <UserOutput />
       </div>
     );
   }
