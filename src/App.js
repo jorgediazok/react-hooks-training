@@ -11,6 +11,7 @@ class App extends Component {
       { name: 'Manu', age: 29 },
       { name: 'Stephanie', age: 26 },
     ],
+    username: 'superJorge',
   };
 
   switchNameHandler = (newName) => {
@@ -31,6 +32,10 @@ class App extends Component {
         { name: 'Stephanie', age: 56 },
       ],
     });
+  };
+
+  usernameChangedHandler = (event) => {
+    this.setState({ username: event.target.value });
   };
 
   render() {
@@ -67,10 +72,13 @@ class App extends Component {
           name={this.state.persons[2].name}
           age={this.state.persons[2].age}
         />
-        <UserInput />
-        <UserOutput />
-        <UserOutput />
-        <UserOutput />
+        <UserInput
+          changed={this.usernameChangedHandler}
+          currentName={this.state.username}
+        />
+        <UserOutput userName={this.state.username} />
+        <UserOutput userName={this.state.username} />
+        <UserOutput userName="Sulu  " />
       </div>
     );
   }
