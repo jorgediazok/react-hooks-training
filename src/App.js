@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Person from './Person/Person';
-import Radium, { StyleRoot } from 'radium';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 import './App.css';
 
 class App extends Component {
@@ -63,13 +63,14 @@ class App extends Component {
         <div>
           {this.state.persons.map((person, index) => {
             return (
-              <Person
-                click={() => this.deletePersonHandler(index)}
-                name={person.name}
-                age={person.age}
-                key={person.id}
-                change={(event) => this.nameChangedHandler(event, person.id)}
-              />
+              <ErrorBoundary key={person.id}>
+                <Person
+                  click={() => this.deletePersonHandler(index)}
+                  name={person.name}
+                  age={person.age}
+                  changed={(event) => this.nameChangedHandler(event, person.id)}
+                />
+              </ErrorBoundary>
             );
           })}
         </div>
@@ -91,18 +92,16 @@ class App extends Component {
     }
 
     return (
-      <StyleRoot>
-        <div className="App">
-          <h1>We are going to train a bit with React</h1>
-          <p className={classes.join(' ')}>PATADA DE CANGURO GOLPE DURO</p>
-          <button style={style} onClick={this.togglePersonsHandler}>
-            Switch Name
-          </button>
-          {persons}
-        </div>
-      </StyleRoot>
+      <div className="App">
+        <h1>We are going to train a bit with React</h1>
+        <p className={classes.join(' ')}>PATADA DE CANGURO GOLPE DURO</p>
+        <button style={style} onClick={this.togglePersonsHandler}>
+          Switch Name
+        </button>
+        {persons}
+      </div>
     );
   }
 }
 
-export default Radium(App);
+export default App;
