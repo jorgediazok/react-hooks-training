@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Person from './Person/Person';
+import Person from './Persons/Person/Person';
 import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 import './App.css';
 
